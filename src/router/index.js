@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
-import Todolists  from "@/views/Todolists";
+import Todolists  from "@/views/TodoLists";
 
 const PATH = {
   home: '/',
