@@ -1,10 +1,15 @@
 <template>
+  <div>
+    <button @click="deleteList">delete list</button>
+    <button @click="renameList">rename list</button>
+  </div>
   <div id="list">
-    <h3>{{ idTodo }} | {{ titleTodo }}}</h3>
+    <h3>{{ titleTodo }}</h3>
     <AddNewTask :callback="addNewTask"/>
     <TodoItems :items="tasks"
                :change-task-s="changeTaskStatus"
                :delete-task="deleteTask"
+               :todo-id="idTodo"
     />
     <div style="margin-top: 20px ">
       <button @click="getAll">all</button>
@@ -99,6 +104,25 @@ export default {
         todoId: todoId,
         title: title
       })
+    },
+    deleteList(){
+      const todoId = this.idTodo
+      this.$store.dispatch({
+        type: 'deleteList',
+        todoId: todoId
+      })
+    }, renameList(){
+      const title = prompt(`Please enter type new name`, '')
+      const todoId = this.idTodo
+      if (title.trim() !== '') {
+        this.$store.dispatch({
+          type: 'renameList',
+          todoId: todoId,
+          title: title
+        })
+      } else {
+        alert ('Field should be required 🤬')
+      }
     }
   },
 }

@@ -1,6 +1,14 @@
 import {createStore} from 'vuex'
-import {ADD_NEW_LIST, ADD_TASK, CHANGE_TASK_STATUS, DELETE_TASK} from "../util/mutation";
-import {addNewId, arrListId, firstListId, secondListId, thirdListId} from "../util/arrListId";
+import {
+    ADD_NEW_LIST,
+    ADD_TASK,
+    CHANGE_TASK_STATUS,
+    DELETE_LIST,
+    DELETE_TASK,
+    RENAME_LIST,
+    RENAME_TASK_OF_THE_LIST
+} from "../util/mutation";
+import {addNewId, arrListId, deleteId, firstListId, secondListId, thirdListId} from "../util/arrListId";
 
 
 export default createStore({
@@ -8,7 +16,7 @@ export default createStore({
         lists: [
             {id: firstListId, name: 'List 1'},
             {id: secondListId, name: 'List 2'},
-            {id: thirdListId, name: 'List 2'},
+            {id: thirdListId, name: 'List 3'},
         ]
         ,
         tasks: {
@@ -54,6 +62,27 @@ export default createStore({
                 ...state.tasks,
                 [arrListId[listId]]: []
             }
+        },
+        [DELETE_LIST](state, payload) {
+            const {todoId} = payload
+            const copyState = {...state.tasks}
+            deleteId(todoId)
+            // eslint-disable-next-line no-empty-pattern
+            const { [todoId]:[] ,  ...rest} = copyState
+            state.lists = state.lists.filter(l => l.id !== todoId)
+            state.tasks = rest
+        },
+        [RENAME_LIST](state, payload){
+            state.lists = state.lists.map(l => l.id === payload.todoId ? {...l, name: payload.title} : l)
+        },
+        [RENAME_TASK_OF_THE_LIST](state, payload){
+            // eslint-disable-next-line no-unused-vars
+            const {todoId, taskId, title} = payload
+            // eslint-disable-next-line no-debugger
+            debugger
+            state.tasks[payload.todoId] = state.tasks[payload.todoId].map(t =>{
+                return t.id !== payload.taskId ? t : {...t, name: payload.title}
+            })
         }
     },
     actions: {
@@ -68,6 +97,15 @@ export default createStore({
         },
         addList(context, payload) {
             context.commit(ADD_NEW_LIST, payload)
+        },
+        deleteList(context, payload) {
+            context.commit(DELETE_LIST, payload)
+        },
+        renameList(context, payload){
+            context.commit(RENAME_LIST, payload)
+        },
+        renameTaskOfTheList(context, payload){
+            context.commit(RENAME_TASK_OF_THE_LIST, payload)
         }
 
     },
