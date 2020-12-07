@@ -1,4 +1,10 @@
 <template>
+  <div>
+    <label>
+      <input class="listInput" v-model="title"/>
+    </label>
+    <button @click="addNewList">Add new list</button>
+  </div>
   <div id="container">
     <div v-for="listsData in data.lists" :key="listsData.id" class="content">
       <Todolist :title-todo="listsData.name"
@@ -12,7 +18,7 @@
 
 <script>
 import {ref} from 'vue'
-import Todolist from "@/components/TodoList";
+import Todolist from "../components/TodoList";
 import {useStore} from "vuex";
 
 export default {
@@ -23,12 +29,26 @@ export default {
   setup() {
     const store = useStore();
     const data = ref(store.state);
+    const title = ref('')
 
     return {
-      data
+      data,
+      title
     }
+  },
+  methods: {
+    addNewList() {
+      if (this.title.trim() !== '') {
+        this.$store.dispatch({
+          type: 'addList',
+          title: this.title,
+        });
+        this.title = ''
+      } else {
+        alert('Bad action')
+      }
+    },
   }
-
 }
 </script>
 
@@ -39,6 +59,7 @@ export default {
   grid-template-columns: repeat(3, 200px);
   grid-gap: 5px;
 }
+
 #container {
   width: 80%;
   margin: auto;

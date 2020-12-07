@@ -1,7 +1,14 @@
 <template>
   <div>
-    <div v-for="(value) in items.map(t => t)" v-bind:key="value.id" id="#items">
-      <span>{{value.name}}</span>
+    <div v-for="(task) in items.map(t => t)" v-bind:key="task.id" id="#items">
+      <input type="checkbox"
+             :checked="task.isDone"
+             @input="changeTaskS(task.id)"
+
+      />
+      <span>{{task.name}}</span>
+      <span>{{task.isDone}}</span>
+      <button @click="deleteTask(task.id)">{{"💥"}}</button>
     </div>
   </div>
 </template>
@@ -11,7 +18,7 @@
 
 export default {
   name: "TodoItem",
-  props: ['items'],
+  props: ['items', 'changeTaskS', 'deleteTask'],
   setup() {
 
     return {
