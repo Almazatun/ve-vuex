@@ -76,10 +76,6 @@ export default createStore({
             state.lists = state.lists.map(l => l.id === payload.todoId ? {...l, name: payload.title} : l)
         },
         [RENAME_TASK_OF_THE_LIST](state, payload){
-            // eslint-disable-next-line no-unused-vars
-            const {todoId, taskId, title} = payload
-            // eslint-disable-next-line no-debugger
-            debugger
             state.tasks[payload.todoId] = state.tasks[payload.todoId].map(t =>{
                 return t.id !== payload.taskId ? t : {...t, name: payload.title}
             })
