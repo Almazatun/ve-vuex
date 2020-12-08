@@ -112,7 +112,7 @@ export default {
         todoId: todoId
       })
     }, renameList(){
-      const title = prompt(`Please enter type new name`, '')
+      const title = prompt(`Please enter new name of the list`, '')
       const todoId = this.idTodo
       if (title.trim() !== '') {
         this.$store.dispatch({

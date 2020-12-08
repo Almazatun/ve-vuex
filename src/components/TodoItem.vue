@@ -20,7 +20,7 @@ export default {
   props: ['items', 'changeTaskS', 'deleteTask', 'todoId'],
   methods: {
     renameTask(todoId, tasId){
-      const title = prompt(`Please enter type new name`, '')
+      const title = prompt(`Please enter new name of the task`, '')
       if (title.trim() !== '') {
         this.$store.dispatch({
           type: 'renameTaskOfTheList',

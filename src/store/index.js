@@ -116,10 +116,10 @@ export default createStore({
             return state.tasks[todoId]
         },
         isDone: (state) => (todoId) => {
-            return state.tasks[todoId].filter(s => s.isDone === true)
+            return state.tasks[todoId].filter(s => s.isDone)
         },
         inProgress: (state) => (todoId) => {
-            return state.tasks[todoId].filter(s => s.isDone !== true)
+            return state.tasks[todoId].filter(s => !s.isDone)
         },
     },
     modules: {},
