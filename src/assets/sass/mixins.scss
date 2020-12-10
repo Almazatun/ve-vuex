@@ -1,0 +1,52 @@
+@mixin BtnAddList($backgroundColor){
+  width: auto;
+  background: $backgroundColor;
+  border: 0 solid;
+  padding: 10px;
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  outline: 0 solid;
+}
+@mixin transition {
+  transition: all .2s ease-in-out;
+}
+
+@mixin listTopBtns($hoverBackgroundColor) {
+  margin: 5px;
+  border: 0 solid;
+  padding: 10px 10px;
+  border-radius: 4px;
+  outline: 0 solid;
+  background: $hoverBackgroundColor;
+}
+
+/*Media*/
+@mixin Media1600(){
+  @media (max-width: 1600px) {
+    #container{
+      grid-template-columns: repeat(2, 400px);
+      justify-content: center;
+    }
+  }
+}
+@mixin Media1050(){
+  @media (max-width: 1050px) {
+    #container{
+      grid-template-columns: repeat(1, 400px);
+      justify-content: center;
+    }
+  }
+}
+@mixin Media550(){
+  @media (max-width: 550px) {
+    #container{
+      display: flex;
+      flex-direction: column;
+      width: 350px;
+    }
+  }
+
+}
