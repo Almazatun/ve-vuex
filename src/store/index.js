@@ -2,7 +2,7 @@ import {createStore} from 'vuex'
 import {
     ADD_NEW_LIST,
     ADD_TASK,
-    CHANGE_TASK_STATUS,
+    CHANGE_TASK_STATUS, CLEAR_COMPLETED,
     DELETE_LIST,
     DELETE_TASK,
     RENAME_LIST,
@@ -21,19 +21,19 @@ export default createStore({
         ,
         tasks: {
             [firstListId]: [
-                {id: '1', name: '1️⃣', isDone: false},
-                {id: '2', name: '1️⃣', isDone: true},
-                {id: '3', name: '1️⃣', isDone: false},
+                {id: '1', name: 'task 1', isDone: false},
+                {id: '2', name: 'task 1', isDone: false},
+                {id: '3', name: 'task 1', isDone: false},
             ],
             [secondListId]: [
-                {id: '1', name: '2️⃣', isDone: false},
-                {id: '2', name: '2️⃣', isDone: false},
-                {id: '3', name: '2️⃣', isDone: true},
+                {id: '1', name: 'task 2', isDone: false},
+                {id: '2', name: 'task 2', isDone: false},
+                {id: '3', name: 'task 2', isDone: true},
             ],
             [thirdListId]: [
-                {id: '1', name: '3️', isDone: false},
-                {id: '2', name: '3️⃣', isDone: false},
-                {id: '3', name: '3️⃣', isDone: true},
+                {id: '1', name: 'task 3', isDone: false},
+                {id: '2', name: 'task 3', isDone: false},
+                {id: '3', name: 'task 3', isDone: true},
             ],
         },
     },
@@ -79,6 +79,9 @@ export default createStore({
             state.tasks[payload.todoId] = state.tasks[payload.todoId].map(t =>{
                 return t.id !== payload.taskId ? t : {...t, name: payload.title}
             })
+        },
+        [CLEAR_COMPLETED](state, payload){
+            state.tasks[payload.todoId] = state.tasks[payload.todoId].filter(t => !t.isDone)
         }
     },
     actions: {
