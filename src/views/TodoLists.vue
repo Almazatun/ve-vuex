@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <label>
-      <input class="listInput" v-model="title"/>
-    </label>
-    <button @click="addNewList">Add new list</button>
+  <div class="container_top">
+    <button class="btn_add_new_list" @click="addNewList">Add list</button>
   </div>
   <div id="container">
     <div v-for="listsData in data.lists" :key="listsData.id" class="content">
@@ -29,42 +26,56 @@ export default {
   setup() {
     const store = useStore();
     const data = ref(store.state);
-    const title = ref('')
 
     return {
-      data,
-      title
+      data
     }
   },
   methods: {
     addNewList() {
-      if (this.title.trim() !== '') {
+      const title = prompt(`Please enter name of new list`, '')
+      if (title && title.trim() !== '') {
         this.$store.dispatch({
           type: 'addList',
-          title: this.title,
+          title: title,
         });
-        this.title = ''
+      } else if (title === null) {
+        alert('It is up to you')
       } else {
-        alert('Bad action')
+        alert('Field should be required')
       }
     },
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+.container_top {
+  width: 80%;
+  margin: 20px auto;
+  box-sizing: border-box;
+  display: flex;
+
+  .btn_add_new_list {
+    @include BtnAddList($addNewListBtn);
+  }
+}
+
 #container {
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: repeat(3, 200px);
-  grid-gap: 5px;
+  grid-template-columns: repeat(3, 400px);
+  grid-gap: 10px;
 }
 
 #container {
   width: 80%;
   margin: auto;
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: space-between;
 }
 
+@include Media1600();
+@include Media1050();
+@include Media550();
 </style>
