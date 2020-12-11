@@ -1,4 +1,9 @@
-# ve-vuex
+# 🎅🤶 Todo-lists app. Vue 3 | Vuex
+
+[▶️ Launch Demo](https://almazatun.github.io/ve-vuex/#/)
+
+![beautiful-dnd](/todo_lists.gif/)
+
 
 ## Project setup
 ```
