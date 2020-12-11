@@ -58,7 +58,7 @@ export default {
   setup(props) {
     const store = useStore();
     const sort = ref(ALL)
-    const watchData = store.state.tasks
+    const watchData = store.state
     const tasks = ref(store.getters.tasks(props.idTodo))
 
     function getAll() {

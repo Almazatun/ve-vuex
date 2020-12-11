@@ -55,7 +55,6 @@ export default createStore({
             const {title} = payload
             addNewId()
             const listId = [arrListId.length - 1]
-            console.log(listId)
             const newList = {id: arrListId[listId], name: title}
             state.lists = [newList, ...state.lists]
             state.tasks = {
