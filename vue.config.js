@@ -1,4 +1,5 @@
 module.exports = {
+    publicPath: "/ve-vuex/",
     css: {
         loaderOptions: {
             scss: {
